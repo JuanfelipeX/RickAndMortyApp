@@ -32,7 +32,7 @@ export class CharacterListComponent implements OnInit {
 
   private pageNum = 1;
 
-  private query!: string ;
+  private query!: string;
 
   private hideScrollHeight = 200;
 
@@ -45,7 +45,7 @@ export class CharacterListComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.getDataFromService();
+    this.getCharactersByQuery();
   }
 
   private getDataFromService(): void {
@@ -61,8 +61,17 @@ export class CharacterListComponent implements OnInit {
           } else {
             this.characters = [];
           }
-        },
+        }
         //(error: TrackHttpError) => console.log(error.friendlyMessage)
       );
   }
+
+  private getCharactersByQuery(): void {
+    this.route.queryParams.pipe(take(1)).subscribe((params) => {
+      console.log("parame", params)
+      this.query = params['q'];
+      this.getDataFromService();
+    });
+  }
+
 }
