@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { catchError } from 'rxjs';
+import { catchError, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Character } from '../interfaces/character.interface';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
@@ -16,7 +16,18 @@ export class CharacterService {
       .pipe(catchError((err) => this.handleHttpError(err)));
   }
 
+  searchCharacters(
+    query = '',
+    page = 200
+  ): Observable<Character[]> {
+    const filter = `${environment.baseUrlAPI}/?name=${query}&page=${page}`;
+    return this.http
+      .get<Character[]>(filter)
+  }
+
   handleHttpError(err: any): any {
     throw new Error('Method not implemented.');
   }
+
+  
 }
