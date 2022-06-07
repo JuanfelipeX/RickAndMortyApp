@@ -42,12 +42,15 @@ export class CharacterListComponent implements OnInit {
     private characterSvc: CharacterService,
     private route: ActivatedRoute,
     private router: Router
-  ) {}
+  ) {
+    this.onUrlChanged();
+  }
 
   ngOnInit(): void {
     this.getCharactersByQuery();
   }
 
+  //bring all of characters from the api
   private getDataFromService(): void {
     this.characterSvc
       .searchCharacters(this.query, this.pageNum)
@@ -66,12 +69,23 @@ export class CharacterListComponent implements OnInit {
       );
   }
 
+  //brong charactheres depending the inpunt query
   private getCharactersByQuery(): void {
     this.route.queryParams.pipe(take(1)).subscribe((params) => {
-      console.log("parame", params)
+      console.log('parame', params);
       this.query = params['q'];
       this.getDataFromService();
     });
   }
 
+  //we use this function for verify the if the url change depending the inpunt query
+  private onUrlChanged(): void {
+    this.router.events
+      .pipe(filter((event) => event instanceof NavigationEnd))
+      .subscribe(() => {
+        this.characters = [];
+        this.pageNum = 1;
+        this.getCharactersByQuery();
+      });
+  }
 }
