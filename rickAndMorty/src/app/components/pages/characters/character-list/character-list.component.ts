@@ -39,6 +39,7 @@ export class CharacterListComponent implements OnInit {
   private showScrollHeight = 500;
 
   constructor(
+    @Inject(DOCUMENT) private document: Document,
     private characterSvc: CharacterService,
     private route: ActivatedRoute,
     private router: Router
@@ -66,13 +67,13 @@ export class CharacterListComponent implements OnInit {
           }
         }
         //(error: TrackHttpError) => console.log(error.friendlyMessage)
-      );
+    );
   }
 
   //brong charactheres depending the inpunt query
   private getCharactersByQuery(): void {
     this.route.queryParams.pipe(take(1)).subscribe((params) => {
-      console.log('parame', params);
+      //console.log('parame', params);
       this.query = params['q'];
       this.getDataFromService();
     });
@@ -87,5 +88,29 @@ export class CharacterListComponent implements OnInit {
         this.pageNum = 1;
         this.getCharactersByQuery();
       });
+  }
+
+  onScrollTop(): void {
+    this.document.body.scrollTop = 0; // Safari
+    this.document.documentElement.scrollTop = 0; // Other
+  }
+
+  @HostListener('window:scroll', [])
+  onWindowScroll(): void {
+    const yOffSet = window.pageYOffset;
+    if (
+      (yOffSet ||
+        this.document.documentElement.scrollTop ||
+        this.document.body.scrollTop) > this.showScrollHeight
+    ) {
+      this.showGoUpButton = true;
+    } else if (
+      this.showGoUpButton &&
+      (yOffSet ||
+        this.document.documentElement.scrollTop ||
+        this.document.body.scrollTop) < this.hideScrollHeight
+    ) {
+      this.showGoUpButton = false;
+    }
   }
 }
