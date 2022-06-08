@@ -1,0 +1,13 @@
+@font-face {
+    font-family: "Oxygen";
+    src: local("Oxygen"), url(../../../../assets/fonts/get_schwifty.ttf) format("truetype");
+}
+
+.form-control::placeholder {
+    font-family: "Oxygen";
+    font-size: 2rem;
+}
+
+.form-control {
+    font-size: 1.5rem;
+}
