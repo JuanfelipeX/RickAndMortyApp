@@ -5,12 +5,13 @@ import { HeaderComponent } from '@app/shared/components/header/header.component'
 import { CharacterListComponent } from '@characters/character-list/character-list.component';
 import { CharacterDetailsComponent } from '@characters/character-details/character-details.component';
 import { RouterModule } from '@angular/router';
+import { CharacterComponent } from './character.component';
 
 
  const myComponents = [
    CharacterDetailsComponent,
    CharacterListComponent,
-   //CharacterComponent,
+   CharacterComponent,
  ];
 
 
