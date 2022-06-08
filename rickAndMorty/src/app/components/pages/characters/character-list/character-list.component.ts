@@ -67,7 +67,7 @@ export class CharacterListComponent implements OnInit {
           }
         }
         //(error: TrackHttpError) => console.log(error.friendlyMessage)
-    );
+      );
   }
 
   //brong charactheres depending the inpunt query
@@ -93,6 +93,13 @@ export class CharacterListComponent implements OnInit {
   onScrollTop(): void {
     this.document.body.scrollTop = 0; // Safari
     this.document.documentElement.scrollTop = 0; // Other
+  }
+
+  onScrollDown(): void {
+    if (this.info.next) {
+      this.pageNum++;
+      this.getDataFromService();
+    }
   }
 
   @HostListener('window:scroll', [])
