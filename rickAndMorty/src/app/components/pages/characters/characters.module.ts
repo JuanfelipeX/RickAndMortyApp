@@ -6,6 +6,7 @@ import { CharacterListComponent } from '@characters/character-list/character-lis
 import { CharacterDetailsComponent } from '@characters/character-details/character-details.component';
 import { RouterModule } from '@angular/router';
 import { CharacterComponent } from './character.component';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 
  const myComponents = [
@@ -17,7 +18,7 @@ import { CharacterComponent } from './character.component';
 
 @NgModule({
   declarations: [...myComponents],
-  imports: [CommonModule, RouterModule], //InfiniteScrollModule],
+  imports: [CommonModule, RouterModule, InfiniteScrollModule],
   exports: [...myComponents],
 })
 export class CharactersModule {}

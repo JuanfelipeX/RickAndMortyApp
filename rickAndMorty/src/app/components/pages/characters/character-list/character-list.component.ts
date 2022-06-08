@@ -102,6 +102,7 @@ export class CharacterListComponent implements OnInit {
     }
   }
 
+  //https://youtu.be/hGU2ceM8aVY?t=6015
   @HostListener('window:scroll', [])
   onWindowScroll(): void {
     const yOffSet = window.pageYOffset;
