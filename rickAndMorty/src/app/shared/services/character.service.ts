@@ -16,18 +16,12 @@ export class CharacterService {
       .pipe(catchError((err) => this.handleHttpError(err)));
   }
 
-  searchCharacters(
-    query = '',
-    page = 200
-  ): Observable<Character[]> {
+  searchCharacters(query = '', page = 200): Observable<Character[]> {
     const filter = `${environment.baseUrlAPI}/?name=${query}&page=${page}`;
-    return this.http
-      .get<Character[]>(filter)
+    return this.http.get<Character[]>(filter);
   }
 
-  handleHttpError(err: any): any {
+  handleHttpError(err: any): never {
     throw new Error('Method not implemented.');
   }
-
-  
 }
