@@ -1,4 +1,4 @@
-<div class="card">
+<div class="card" (click)="hidden = !hidden">
     <div class="image">
         <a [routerLink]="['/character-details', character.id]">
             <img [src]="character.image" [alt]="character.name" class="card-img-top" />
@@ -7,10 +7,13 @@
     <div class="card-inner">
         <div class="header">
             <a [routerLink]="['/character-details', character.id]">
-                <h2>{{ character.name | slice: 0:15}}</h2>
+                <h2>{{ character.name | slice: 0:15 }}</h2>
             </a>
-            <h4 class="text-muted">{{ character.gender }}</h4>
-            <small class="text-muted">{{ character.created | date }}</small>
+            <h3 class="text-muted">{{ character.gender }}</h3>
+            <div [ngClass]="{'d-none': hidden === false }">
+                <h4 class="header text-muted">{{ character.status }} {{ character.species }}</h4>
+                <h6 class="text-muted"> {{ character.created | date }}</h6>
+            </div>
         </div>
     </div>
 </div>
